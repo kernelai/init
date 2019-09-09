@@ -113,3 +113,5 @@ ssh -D 1081  -p 28901 -q -C -N -f root@67.230.190.228
 #alias sock5='ssh -D 8080 -q -C -N -f user@your.server'
 #alias end
 
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
