@@ -70,7 +70,8 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git 
          extract 
-        zsh-syntax-highlighting
+	 zsh-autosuggestions
+	 zsh-syntax-highlighting
         )
 
 source $ZSH/oh-my-zsh.sh
@@ -109,9 +110,16 @@ alias yi="yum install"
 alias yiy="yum install -y"
 alias ..="cd .."
 alias ...="cd ..; cd .."
-ssh -D 1081  -p 28901 -q -C -N -f root@67.230.190.228
+#ssh -D 1081  -p 28901 -q -C -N -f root@67.230.190.228
+alias sock5='ssh -D 1081  -p 28901 -q -C -N -f root@67.230.190.228'
 #alias sock5='ssh -D 8080 -q -C -N -f user@your.server'
 #alias end
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+
+if [ -e /usr/share/terminfo/x/xterm-256color ]; then                                                      
+     export TERM='xterm-256color'
+else
+     export TERM-'xterm-color'
+fi
