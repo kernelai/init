@@ -2,15 +2,15 @@
 set -x
 cd /etc/yum.repos.d/
 mkdir -p .repo.bak
-mv ./*.repo .repo.bak 
+mv ./*.repo .repo.bak
 curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 curl -o  /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 rpm -Uvh http://mirror.ghettoforge.org/distributions/gf/gf-release-latest.gf.el7.noarch.rpm
 rpm --import http://mirror.ghettoforge.org/distributions/gf/RPM-GPG-KEY-gf.el7
 yum makecache
-yum -y remove vim-minimal vim-common vim-enhanced 
-yum -y --enablerepo=gf-plus install vim-enhanced 
-yum install -y  git  zsh make wget
+yum -y remove vim-minimal vim-common vim-enhanced
+yum -y --enablerepo=gf-plus install vim-enhanced
+yum install -y  git  zsh make wget ack
 echo "install oh-my-sh"
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 echo "install zsh plugin zsh-autosuggestion"
