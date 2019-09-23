@@ -8,7 +8,8 @@ yum install -y ncdu figlet
 curl -o /etc/yum.repos.d/konimex-neofetch-epel-7.repo https://copr.fedorainfracloud.org/coprs/konimex/neofetch/repo/epel-7/konimex-neofetch-epel-7.repo
 yum install -y  neofetch
 # install dev tools
-yum install gcc-c++ clang -y
+#yum install gcc-c++ clang -y
 yum install centos-release-scl -y
 yum install devtoolset-8 -y
 scl enable devtoolset-8 bash
+yum install -y tig

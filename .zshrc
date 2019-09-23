@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/root/.oh-my-zsh"
+export ZSH="~/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -84,11 +84,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -102,18 +102,33 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# fzf config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-. /root/.oh-my-zsh/custom/plugins/z/z.sh
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '(highlight -O ansi {} || cat {}) 2> /dev/null | head -500'"
 
-#alias begin
+. $ZSH/.oh-my-zsh/custom/plugins/z/z.sh
+
+#===================================================================
+# alias
+#===================================================================
+# git
 alias yi="yum install"
 alias yiy="yum install -y"
 alias ..="cd .."
 alias ...="cd ..; cd .."
+alias gs="git status"
+#alias vf="vim $(fzf)"
 #ssh -D 1081  -p 28901 -q -C -N -f root@67.230.190.228
 alias sock5='ssh -D 1081  -p 28901 -q -C -N -f root@67.230.190.228'
 #alias sock5='ssh -D 8080 -q -C -N -f user@your.server'
-#alias end
+# fzf
+
+#===================================================================
+# alias
+#===================================================================
+#vf() { fzf | xargs -r -I % vim %}
+#se() { du -a ~/git_repo/* /var/ws/* |awk '{print $2}' |fzf |xargs -r -I % vim %;}
+#
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -124,4 +139,5 @@ else
      export TERM-'xterm-color'
 fi
 
-export EDITOR=/usr/local/bin/vim 
+
+

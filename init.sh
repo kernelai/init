@@ -5,6 +5,7 @@ mkdir -p .repo.bak
 mv ./*.repo .repo.bak
 curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 curl -o  /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+# repo for vim8.0
 rpm -Uvh http://mirror.ghettoforge.org/distributions/gf/gf-release-latest.gf.el7.noarch.rpm
 rpm --import http://mirror.ghettoforge.org/distributions/gf/RPM-GPG-KEY-gf.el7
 yum makecache
@@ -23,4 +24,5 @@ echo "install fzf"
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
-cp .zshrc ~/.zshrc
+cp ./.zshrc ~/.zshrc
+tput colors
