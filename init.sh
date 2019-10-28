@@ -11,7 +11,7 @@ rpm --import http://mirror.ghettoforge.org/distributions/gf/RPM-GPG-KEY-gf.el7
 yum makecache
 yum -y remove vim-minimal vim-common vim-enhanced
 yum -y --enablerepo=gf-plus install vim-enhanced
-yum install -y  git  zsh make wget ack
+yum install -y  git  zsh make wget ack the_silver_searcher
 echo "install oh-my-sh"
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 echo "install zsh plugin zsh-autosuggestion"
