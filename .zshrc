@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/root/.oh-my-zsh"
+export ZSH="/home/liuzhen3/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -42,7 +42,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+#ENABLE_CORRECTION="false"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -69,13 +69,15 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git 
-         extract 
-	 zsh-autosuggestions
-	 zsh-syntax-highlighting
-        )
+  extract 
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
+# 关闭自动验证命令正确性
+unsetopt correct_all
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -112,11 +114,15 @@ export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '(highlight -O 
 # alias
 #===================================================================
 # git
-alias yi="yum install"
-alias yiy="yum install -y"
-alias ..="cd .."
-alias ...="cd ..; cd .."
-alias gs="git status"
+function gitShort() {
+  alias yi="yum install"
+  alias yiy="yum install -y"
+  alias ..="cd .."
+  alias ...="cd ..; cd .."
+  alias gs="git status"
+  alias gf="git diff"
+}
+gitShort
 #alias vf="vim $(fzf)"
 #ssh -D 1081  -p 28901 -q -C -N -f root@67.230.190.228
 alias sock5='ssh -D 1081  -p 28901 -q -C -N -f root@67.230.190.228'
@@ -129,15 +135,47 @@ alias sock5='ssh -D 1081  -p 28901 -q -C -N -f root@67.230.190.228'
 #vf() { fzf | xargs -r -I % vim %}
 #se() { du -a ~/git_repo/* /var/ws/* |awk '{print $2}' |fzf |xargs -r -I % vim %;}
 #
+# Usage: psfind <keywords> (RegExp supported)
+function psfind() {
+  ps aux | head -n 1
+  ps aux | grep -E $1 | grep -v grep
+}
+
+function enshort() {
+  alias l='ls -a'
+  alias d='du -h --max-depth 1' 
+}
+#
+#
+#
+#
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 if [ -e /usr/share/terminfo/x/xterm-256color ]; then                                                      
-     export TERM='xterm-256color'
+  export TERM='xterm-256color'
 else
-     export TERM-'xterm-color'
+  export TERM-'xterm-color'
 fi
 
 
+#===================================================================
+# go
+#===================================================================
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOROOT:$GOPATH:$GOBIN
+#export GOPROXY=https://mirrors.aliyun.com/goproxy/
+export GOPROXY="https://goproxy.io"
+#===================================================================
+# autosuggestions
+#===================================================================
+bindkey '^ ' autosuggest-accept
 
+#===================================================================
+# clang
+#===================================================================
+source /opt/rh/llvm-toolset-7.0/enable
+export PATH=/home/liuzhen3/software/cmake-3.18.2-Linux-x86_64/bin:$PATH
+export PATH=/home/liuzhen3/.cargo/bin:$PATH
