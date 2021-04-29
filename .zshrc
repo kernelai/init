@@ -2,17 +2,17 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/liuzhen3/.oh-my-zsh"
+export ZSH="/root/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -33,7 +33,7 @@ ZSH_THEME="robbyrussell"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -42,9 +42,11 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-#ENABLE_CORRECTION="false"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
+# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -64,20 +66,14 @@ ZSH_THEME="robbyrussell"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git 
-  extract 
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# 关闭自动验证命令正确性
-unsetopt correct_all
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -86,11 +82,11 @@ unsetopt correct_all
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -104,12 +100,24 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# fzf config
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '(highlight -O ansi {} || cat {}) 2> /dev/null | head -500'"
 
+plugins=(git
+  extract
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 . $ZSH/custom/plugins/z/z.sh
 
+export LANG="en_US.UTF-8"
+#export LC_ALL="en_US.UTF-8"
+export LC_ALL=
+#===================================================================
+# autosuggestions
+#===================================================================
+bindkey '^ ' autosuggest-accept
 #===================================================================
 # alias
 #===================================================================
@@ -121,61 +129,53 @@ function gitShort() {
   alias ...="cd ..; cd .."
   alias gs="git status"
   alias gf="git diff"
+  alias gl="git log"
+  alias vim="~/local/nvim-linux64/bin/nvim"
 }
 gitShort
-#alias vf="vim $(fzf)"
-#ssh -D 1081  -p 28901 -q -C -N -f root@67.230.190.228
-alias sock5='ssh -D 1081  -p 28901 -q -C -N -f root@67.230.190.228'
-#alias sock5='ssh -D 8080 -q -C -N -f user@your.server'
-# fzf
 
-#===================================================================
-# alias
-#===================================================================
-#vf() { fzf | xargs -r -I % vim %}
-#se() { du -a ~/git_repo/* /var/ws/* |awk '{print $2}' |fzf |xargs -r -I % vim %;}
-#
-# Usage: psfind <keywords> (RegExp supported)
-function psfind() {
-  ps aux | head -n 1
-  ps aux | grep -E $1 | grep -v grep
+setgitproxy() {
+  git config --global https.proxy socks://10.18.61.82:1080
+  git config --global http.proxy socks://10.18.61.82:1080
 }
 
-function enshort() {
-  alias l='ls -a'
-  alias d='du -h --max-depth 1' 
+unsetgitproxy() {
+  git config --global --unset http.proxy
+  git config --global --unset https.proxy
 }
-#
-#
-#
-#
-
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-if [ -e /usr/share/terminfo/x/xterm-256color ]; then                                                      
-  export TERM='xterm-256color'
-else
-  export TERM-'xterm-color'
-fi
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '(highlight -O ansi {} || cat {}) 2> /dev/null | head -500'"
 
 
-#===================================================================
-# go
-#===================================================================
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOROOT:$GOPATH:$GOBIN
-#export GOPROXY=https://mirrors.aliyun.com/goproxy/
-export GOPROXY="https://goproxy.io"
-#===================================================================
-# autosuggestions
-#===================================================================
-bindkey '^ ' autosuggest-accept
+#设置go proxy
+export GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
+#设置 snap
+export PATH=/var/lib/snapd/snap/bin:$PATH
 
+LOCAL=/root/local
+# cmake path
+CMAKE_PATH=${LOCAL}/cmake-3.20/bin
+export PATH=${CMAKE_PATH}:$PATH
+#ctags
+CTAGS_PATH=${LOCAL}/ctags/bin
+export PATH=${CTAGS_PATH}:$PATH
+
+NVIM_PATH=${LOCAL}/nvim-linux64/bin
+export PATH=${NVIM_PATH}:$PATH
+
+#export PATH=/roo/go/src/project/logshuttle/beats_src/bin:$PATH
+#export GOPATH=/root/go/src/project/logshuttle/beats_src
+#export PATH=/roo/go/src/project/logshuttle/beats_src/bin:$PATH
+export GOPATH=/root/go
+export PATH="$GOPATH/bin:$PATH"
+
+export LIBRARY_PATH=$LIBRARY_PATH:/root/local/librdkafka/lib
 #===================================================================
-# clang
+# rocksdb
 #===================================================================
-source /opt/rh/llvm-toolset-7.0/enable
-export PATH=/home/liuzhen3/software/cmake-3.18.2-Linux-x86_64/bin:$PATH
-export PATH=/home/liuzhen3/.cargo/bin:$PATH
+#export DB_DIR=~/test/rocksdb/db
+#export WAL_DIR=~/test/rocksdb/wal
+#export TEMP=~/test/rocksdb/tmp
+#export OUTPUT_DIR=~/test/rocksdb/output
+#export CPATH=$CPATH:/usr/local/include
+#export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/lib
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/
