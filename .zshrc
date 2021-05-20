@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/root/.oh-my-zsh"
+export ZSH="/home/kernelai/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -105,6 +105,16 @@ plugins=(git
   extract
   zsh-autosuggestions
   zsh-syntax-highlighting
+  tmux
+  yum
+  brew
+  colored-man-pages
+  common-aliases
+  golang
+  tig
+  sudo
+  themes
+  zsh-interactive-cd
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -123,8 +133,6 @@ bindkey '^ ' autosuggest-accept
 #===================================================================
 # git
 function gitShort() {
-  alias yi="yum install"
-  alias yiy="yum install -y"
   alias ..="cd .."
   alias ...="cd ..; cd .."
   alias gs="git status"
@@ -151,9 +159,9 @@ export GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
 #设置 snap
 export PATH=/var/lib/snapd/snap/bin:$PATH
 
-LOCAL=/root/local
+LOCAL=/home/kernelai/local
 # cmake path
-CMAKE_PATH=${LOCAL}/cmake-3.20/bin
+CMAKE_PATH=${LOCAL}/cmake-3.20.2-linux-x86_64/bin
 export PATH=${CMAKE_PATH}:$PATH
 #ctags
 CTAGS_PATH=${LOCAL}/ctags/bin
@@ -162,13 +170,9 @@ export PATH=${CTAGS_PATH}:$PATH
 NVIM_PATH=${LOCAL}/nvim-linux64/bin
 export PATH=${NVIM_PATH}:$PATH
 
-#export PATH=/roo/go/src/project/logshuttle/beats_src/bin:$PATH
-#export GOPATH=/root/go/src/project/logshuttle/beats_src
-#export PATH=/roo/go/src/project/logshuttle/beats_src/bin:$PATH
-export GOPATH=/root/go
+export GOPATH=/home/kernelai/go
 export PATH="$GOPATH/bin:$PATH"
 
-export LIBRARY_PATH=$LIBRARY_PATH:/root/local/librdkafka/lib
 #===================================================================
 # rocksdb
 #===================================================================
