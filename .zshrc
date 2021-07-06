@@ -163,12 +163,22 @@ LOCAL=/home/kernelai/local
 # cmake path
 CMAKE_PATH=${LOCAL}/cmake-3.20.2-linux-x86_64/bin
 export PATH=${CMAKE_PATH}:$PATH
+
+#gcc 10.2
+#GCC_PATH=${LOCAL}/gcc-10.2/bin
+#export PATH=${GCC_PATH}:$PATH
 #ctags
 CTAGS_PATH=${LOCAL}/ctags/bin
 export PATH=${CTAGS_PATH}:$PATH
 
 NVIM_PATH=${LOCAL}/nvim-linux64/bin
 export PATH=${NVIM_PATH}:$PATH
+
+BEAR_PATH=${LOCAL}/bear/bin
+export PATH=${BEAR_PATH}:$PATH
+
+BIN_PATH=${LOCAL}/bin
+export PATH=${BIN_PATH}:$PATH
 
 export GOPATH=/home/kernelai/go
 export PATH="$GOPATH/bin:$PATH"
