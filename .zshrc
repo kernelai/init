@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/kernelai/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -105,7 +105,6 @@ plugins=(git
   extract
   zsh-autosuggestions
   zsh-syntax-highlighting
-  tmux
   yum
   brew
   colored-man-pages
@@ -125,10 +124,6 @@ export LANG="en_US.UTF-8"
 #export LC_ALL="en_US.UTF-8"
 export LC_ALL=
 #===================================================================
-# autosuggestions
-#===================================================================
-bindkey '^ ' autosuggest-accept
-#===================================================================
 # alias
 #===================================================================
 # git
@@ -138,7 +133,6 @@ function gitShort() {
   alias gs="git status"
   alias gf="git diff"
   alias gl="git log"
-  alias vim="~/local/nvim-linux64/bin/nvim"
 }
 gitShort
 
@@ -151,45 +145,4 @@ unsetgitproxy() {
   git config --global --unset http.proxy
   git config --global --unset https.proxy
 }
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '(highlight -O ansi {} || cat {}) 2> /dev/null | head -500'"
 
-
-#设置go proxy
-export GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
-#设置 snap
-export PATH=/var/lib/snapd/snap/bin:$PATH
-
-LOCAL=/home/kernelai/local
-# cmake path
-CMAKE_PATH=${LOCAL}/cmake-3.20.2-linux-x86_64/bin
-export PATH=${CMAKE_PATH}:$PATH
-
-#gcc 10.2
-#GCC_PATH=${LOCAL}/gcc-10.2/bin
-#export PATH=${GCC_PATH}:$PATH
-#ctags
-CTAGS_PATH=${LOCAL}/ctags/bin
-export PATH=${CTAGS_PATH}:$PATH
-
-NVIM_PATH=${LOCAL}/nvim-linux64/bin
-export PATH=${NVIM_PATH}:$PATH
-
-BEAR_PATH=${LOCAL}/bear/bin
-export PATH=${BEAR_PATH}:$PATH
-
-BIN_PATH=${LOCAL}/bin
-export PATH=${BIN_PATH}:$PATH
-
-export GOPATH=/home/kernelai/go
-export PATH="$GOPATH/bin:$PATH"
-
-#===================================================================
-# rocksdb
-#===================================================================
-#export DB_DIR=~/test/rocksdb/db
-#export WAL_DIR=~/test/rocksdb/wal
-#export TEMP=~/test/rocksdb/tmp
-#export OUTPUT_DIR=~/test/rocksdb/output
-#export CPATH=$CPATH:/usr/local/include
-#export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/lib
-#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/
