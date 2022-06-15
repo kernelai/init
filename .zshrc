@@ -8,7 +8,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="fino-time"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -137,8 +138,8 @@ function gitShort() {
 gitShort
 
 setgitproxy() {
-  git config --global https.proxy socks://10.18.61.82:1080
-  git config --global http.proxy socks://10.18.61.82:1080
+  git config --global https.proxy socks://127.0.0.1:1080
+  git config --global http.proxy socks://127.0.0.1:1080
 }
 
 unsetgitproxy() {
@@ -146,3 +147,14 @@ unsetgitproxy() {
   git config --global --unset https.proxy
 }
 
+setProxy() {
+  export http_proxy=http://proxy.ops.qihoo.net:8000
+  export https_proxy=http://proxy.ops.qihoo.net:8000
+}
+
+
+unsetProxy() {
+  unset http_proxy
+  unset https_proxy
+}
+setProxy

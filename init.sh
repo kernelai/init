@@ -2,7 +2,7 @@
 set -x
 
 #yum install -y git  zsh make wget ack the_silver_searcher
-sudo apt-get install -y zsh
+#sudo apt-get install -y zsh
 echo "install oh-my-sh"
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 echo "install zsh plugin zsh-autosuggestion"
